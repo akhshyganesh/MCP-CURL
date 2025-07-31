@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /**
  * MCP CURL Server
  * 
@@ -173,7 +175,7 @@ async function executeCurlCommand(input: z.infer<typeof CrudInputSchema>): Promi
 // Create and configure the MCP server
 const server = new Server(
   {
-    name: 'curl-crud-mcp-server',
+    name: 'curl',
     version: '1.0.0',
   },
   {

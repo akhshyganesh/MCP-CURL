@@ -1,5 +1,5 @@
 {
-	// VS Code Tasks Configuration for MCP CURL Server
+	// VS Code Tasks Configuration for MCP HTTP Proxy Server
 	// Repository: https://github.com/akhshyganesh/MCP-CURL
 	"version": "2.0.0",
 	"tasks": [
@@ -15,6 +15,30 @@
 			"isBackground": false,
 			"problemMatcher": [
 				"$tsc"
+			]
+		},
+		{
+			"label": "Test MCP Server",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"test"
+			],
+			"group": "test",
+			"isBackground": false
+		},
+		{
+			"label": "Lint MCP Server",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"lint"
+			],
+			"group": "build",
+			"isBackground": false,
+			"problemMatcher": [
+				"$eslint-stylish"
 			]
 		}
 	]

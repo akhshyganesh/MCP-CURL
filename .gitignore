@@ -1,5 +1,5 @@
 #
-# MCP CURL Server - Git Ignore Rules
+# MCP HTTP Proxy Server - Git Ignore Rules
 # Repository: https://github.com/akhshyganesh/MCP-CURL
 # Author: Akhshy Ganesh <akhshy.balakannan@gmail.com>
 # License: MIT
@@ -134,8 +134,14 @@ dist/
 # Test outputs
 test-results/
 test-reports/
+coverage/
+*.lcov
+.nyc_output/
 
 # MCP specific
 *.mcp.log
+
+# ESLint cache
+.eslintcache
 
 # End of .gitignore

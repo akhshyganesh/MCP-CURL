@@ -1,119 +1,210 @@
-# MCP CURL
+# 🌐 MCP HTTP Proxy
 
-A Model Context Protocol (MCP) server that exposes CRUD endpoints to proxy HTTP requests to external servers using curl commands. All responses are structured for AI consumption with consistent status, data, and error fields.
+> A powerful **Model Context Protocol (MCP)** server that provides HTTP request proxying with CRUD operations for AI applications. All responses are structured for AI consumption with consistent status, data, and error fields.
 
-## Repository Information
+---
 
-- **GitHub**: [https://github.com/akhshyganesh/MCP-CURL](https://github.com/akhshyganesh/MCP-CURL)
-- **Author**: Akhshy Ganesh ([akhshy.balakannan@gmail.com](mailto:akhshy.balakannan@gmail.com))
-- **License**: MIT License
-- **Version**: 1.0.0
-- **Package**: `mcp-curl`
+## 📋 Repository Information
 
-## What is MCP?
+| Field | Value |
+|-------|-------|
+| **🔗 GitHub** | [akhshyganesh/MCP-CURL](https://github.com/akhshyganesh/MCP-CURL) |
+| **👤 Author** | Akhshy Ganesh ([akhshy.balakannan@gmail.com](mailto:akhshy.balakannan@gmail.com)) |
+| **📄 License** | MIT License |
+| **🔖 Version** | 1.0.0 |
+| **📦 Package** | `mcp-http-proxy` |
 
-The Model Context Protocol (MCP) is an open standard that enables secure connections between AI applications and external data sources. This server implements MCP to provide AI assistants with the ability to perform HTTP operations against external APIs through a standardized interface.
+## 🤖 What is MCP?
 
-## Features
+The **Model Context Protocol (MCP)** is an open standard that enables secure connections between AI applications and external data sources. This server implements MCP to provide AI assistants with the ability to perform HTTP operations against external APIs through a standardized interface.
 
-- **CRUD Operations**: Create, Read, Update, Delete via HTTP methods (POST, GET, PUT, DELETE)
-- **Curl Proxy**: Uses system curl commands to communicate with target servers
-- **AI-Friendly Responses**: Structured JSON responses with status, HTTP code, data, and error fields
-- **Intelligent Error Handling**: Provides helpful guidance for common HTTP errors (401, 403, 429, etc.)
-- **Schema Validation**: Input validation using Zod schemas
-- **Security**: Built-in timeout protection and input sanitization to prevent command injection
-- **TypeScript**: Fully typed implementation with the MCP SDK
+---
 
-## Architecture
+## ✨ Features
 
-```
-AI Assistant <-> MCP Client <-> This MCP Server <-> Curl <-> Target API Server
+- 🔄 **CRUD Operations**: Create, Read, Update, Delete via HTTP methods (POST, GET, PUT, DELETE)
+- 🖥️ **Curl Proxy**: Uses system curl commands to communicate with target servers
+- 🤖 **AI-Friendly Responses**: Structured JSON responses with status, HTTP code, data, and error fields
+- 🛡️ **Intelligent Error Handling**: Provides helpful guidance for common HTTP errors (401, 403, 429, etc.)
+- ✅ **Schema Validation**: Input validation using Zod schemas
+- 🔒 **Security**: Built-in timeout protection and input sanitization to prevent command injection
+- 📘 **TypeScript**: Fully typed implementation with the MCP SDK
+
+---
+
+## 🏗️ Architecture
+
+```mermaid
+graph LR
+    A[AI Assistant] <--> B[MCP Client]
+    B <--> C[This MCP Server]
+    C <--> D[Curl]
+    D <--> E[Target API Server]
 ```
 
 The server receives MCP requests, validates input, constructs curl commands, executes them, and returns structured responses.
 
-## Installation & Setup
+## 🚀 Installation & Setup
 
-1. **Clone and install dependencies:**
-   ```sh
-   git clone https://github.com/akhshyganesh/MCP-CURL.git
-   cd MCP-CURL
-   npm install
-   ```
+### 📦 For End Users (Recommended)
 
-2. **Build the project:**
-   ```sh
-   npm run build
-   ```
+#### Option 1: Install from NPM (Easiest)
+```bash
+# Install globally to use anywhere
+npm install -g mcp-http-proxy
 
-3. **Start the server:**
-   ```sh
-   npm start
-   ```
-
-## Development
-
-### Available Scripts
-
-- `npm run build` - Compile TypeScript to JavaScript
-- `npm start` - Start the compiled server
-- `npm run dev` - Watch mode for development (auto-recompile on changes)
-- `npm run clean` - Remove compiled files
-
-### Project Structure
-
-```
-├── src/
-│   ├── index.ts              # Main MCP server implementation
-│   └── @types/               # Custom type declarations
-│       └── modelcontextprotocol__sdk.d.ts
-├── dist/                     # Compiled JavaScript (generated, not tracked)
-├── .vscode/
-│   ├── mcp.json             # VS Code MCP integration config
-│   └── tasks.json           # VS Code build tasks
-├── .github/
-│   └── copilot-instructions.md # GitHub Copilot workspace instructions
-├── test-requests.json        # Sample test requests
-├── test-requests.md          # Test requests documentation
-├── package.json              # Project dependencies and scripts
-├── tsconfig.json            # TypeScript configuration
-├── tsconfig.build.json      # TypeScript build configuration
-├── .gitignore               # Git ignore patterns
-├── LICENSE                  # MIT license file
-└── README.md               # This file
+# Start the server
+mcp-http-proxy
 ```
 
-## Usage
+#### Option 2: Install from GitHub
+```bash
+# Install directly from the repository
+npm install -g git+https://github.com/akhshyganesh/MCP-CURL.git
 
-### Input Schema
+# Start the server
+mcp-http-proxy
+```
+
+#### Option 3: Use with npx (No Installation)
+```bash
+# Run directly without installing
+npx mcp-http-proxy
+```
+
+### 🛠️ For Developers
+
+#### 1️⃣ Clone and Install Dependencies
+```bash
+git clone https://github.com/akhshyganesh/MCP-CURL.git
+cd MCP-CURL
+npm install
+```
+
+#### 2️⃣ Build the Project
+```bash
+npm run build
+```
+
+#### 3️⃣ Start the Server
+```bash
+npm start
+# or for development with auto-reload
+npm run dev
+```
+
+---
+
+## 🔧 MCP Client Configuration
+
+Once installed, you can use this server with any MCP-compatible client. Here are example configurations:
+
+### Claude Desktop Configuration
+Add to your `claude_desktop_config.json`:
+```json
+{
+  "mcpServers": {
+    "mcp-http-proxy": {
+      "command": "mcp-http-proxy"
+    }
+  }
+}
+```
+
+### VS Code MCP Extension
+Add to your `.vscode/mcp.json`:
+```json
+{
+  "mcpServers": {
+    "mcp-http-proxy": {
+      "command": "mcp-http-proxy"
+    }
+  }
+}
+```
+
+---
+
+## 🛠️ Development
+
+### 📜 Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run build` | 🔨 Compile TypeScript to JavaScript |
+| `npm start` | ▶️ Start the compiled server |
+| `npm run dev` | 👀 Watch mode for development (auto-recompile on changes) |
+| `npm run clean` | 🧹 Remove compiled files |
+| `npm test` | 🧪 Run test suite |
+| `npm run test:watch` | 🔍 Run tests in watch mode |
+| `npm run test:coverage` | 📊 Run tests with coverage report |
+| `npm run lint` | 🔍 Check code style and quality |
+| `npm run lint:fix` | 🔧 Fix linting issues automatically |
+
+### 📁 Project Structure
+
+```
+├── 📂 src/
+│   ├── 📄 index.ts              # Main MCP server implementation
+│   └── 📂 @types/               # Custom type declarations
+│       └── 📄 modelcontextprotocol__sdk.d.ts
+├── 📂 tests/                    # Test files
+│   ├── 📄 server.test.ts        # Server functionality tests
+│   └── 📄 setup.ts              # Test setup configuration
+├── 📂 dist/                     # Compiled JavaScript (generated, not tracked)
+├── 📂 .vscode/
+│   ├── 📄 mcp.json             # VS Code MCP integration config
+│   └── 📄 tasks.json           # VS Code build tasks
+├── 📂 .github/
+│   └── 📂 workflows/
+│       └── 📄 ci.yml           # Continuous Integration pipeline
+├── 📄 jest.config.js           # Jest testing configuration
+├── 📄 .eslintrc.js             # ESLint configuration
+├── 📄 .npmignore               # NPM package exclusions
+│   └── 📄 copilot-instructions.md # GitHub Copilot workspace instructions
+├── 📄 test-requests.json        # Sample test requests
+├── 📄 test-requests.md          # Test requests documentation
+├── 📄 package.json              # Project dependencies and scripts
+├── 📄 tsconfig.json            # TypeScript configuration
+├── 📄 tsconfig.build.json      # TypeScript build configuration
+├── 📄 .gitignore               # Git ignore patterns
+├── 📄 LICENSE                  # MIT license file
+└── 📄 README.md               # This file
+```
+
+---
+
+## 📖 Usage
+
+### 📥 Input Schema
 
 The server accepts requests with the following structure:
 
 ```typescript
-{
-  method: 'GET' | 'POST' | 'PUT' | 'DELETE',
-  url: string,                    // Valid URL
-  data?: Record<string, any>,     // Request body (for POST/PUT)
-  headers?: Record<string, string> // HTTP headers
+interface Request {
+  method: 'GET' | 'POST' | 'PUT' | 'DELETE';
+  url: string;                    // Valid URL
+  data?: Record<string, any>;     // Request body (for POST/PUT)
+  headers?: Record<string, string>; // HTTP headers
 }
 ```
 
-### Response Schema
+### 📤 Response Schema
 
 All responses follow this structure:
 
 ```typescript
-{
-  status: 'ok' | 'error',
-  code: number,                   // HTTP status code
-  data: any,                      // Response body (parsed JSON if possible)
-  error?: string                  // Error message (if status is 'error')
+interface Response {
+  status: 'ok' | 'error';
+  code: number;                   // HTTP status code
+  data: any;                      // Response body (parsed JSON if possible)
+  error?: string;                 // Error message (if status is 'error')
 }
 ```
 
-### Examples
+### 💡 Examples
 
-**GET Request:**
+#### 📋 GET Request
 ```json
 {
   "method": "GET",
@@ -124,7 +215,7 @@ All responses follow this structure:
 }
 ```
 
-**POST Request:**
+#### ➕ POST Request
 ```json
 {
   "method": "POST",
@@ -139,7 +230,7 @@ All responses follow this structure:
 }
 ```
 
-**Response Example:**
+#### ✅ Success Response
 ```json
 {
   "status": "ok",
@@ -152,7 +243,7 @@ All responses follow this structure:
 }
 ```
 
-**Error Response Example:**
+#### ❌ Error Response
 ```json
 {
   "status": "error",
@@ -164,35 +255,43 @@ All responses follow this structure:
 }
 ```
 
-## Intelligent Error Handling
+## 🚨 Intelligent Error Handling
 
 The server provides helpful guidance for common HTTP errors:
 
-- **401 Unauthorized**: Suggests adding authentication headers with examples
-- **403 Forbidden**: Explains permission issues and troubleshooting steps
-- **429 Rate Limited**: Recommends waiting and implementing backoff strategies
-- **400 Bad Request**: Guides on fixing request format and validation issues
-- **404 Not Found**: Helps verify URLs and resource existence
-- **5xx Server Errors**: Advises on retry strategies and temporary issues
+| Status | Error | Guidance |
+|--------|-------|----------|
+| **401** | 🔒 Unauthorized | Suggests adding authentication headers with examples |
+| **403** | ⛔ Forbidden | Explains permission issues and troubleshooting steps |
+| **429** | ⏰ Rate Limited | Recommends waiting and implementing backoff strategies |
+| **400** | ❌ Bad Request | Guides on fixing request format and validation issues |
+| **404** | 🔍 Not Found | Helps verify URLs and resource existence |
+| **5xx** | 🛠️ Server Errors | Advises on retry strategies and temporary issues |
 
 Each error response includes specific, actionable guidance to help resolve the issue quickly.
 
-## VS Code Integration
+---
 
-### Setting Up MCP in VS Code
+## 💻 VS Code Integration
 
-1. **Install an MCP Extension**: Install one of these MCP extensions in VS Code:
+### 🔧 Setting Up MCP in VS Code
 
-```vscode-extensions
-automatalabs.copilot-mcp,buildwithlayer.mcp-integration-expert-eligr,semanticworkbenchteam.mcp-server-vscode
+#### 1️⃣ Install an MCP Extension
+Install one of these MCP extensions in VS Code:
+
+```
+📦 automatalabs.copilot-mcp
+📦 buildwithlayer.mcp-integration-expert-eligr  
+📦 semanticworkbenchteam.mcp-server-vscode
 ```
 
-2. **Configure MCP Settings**: The `.vscode/mcp.json` file is already configured:
+#### 2️⃣ Configure MCP Settings
+The `.vscode/mcp.json` file is already configured:
 
 ```json
 {
   "servers": {
-    "curl-crud-mcp-server": {
+    "curl": {
       "type": "stdio",
       "command": "node",
       "args": ["dist/index.js"]
@@ -201,41 +300,50 @@ automatalabs.copilot-mcp,buildwithlayer.mcp-integration-expert-eligr,semanticwor
 }
 ```
 
-3. **Build and Start**: 
-   ```sh
-   npm run build
-   npm start
-   ```
+#### 3️⃣ Build and Start
+```bash
+npm run build
+npm start
+```
 
-4. **Use in VS Code**: Open VS Code's command palette (`Cmd+Shift+P`) and look for MCP-related commands to interact with your server.
+#### 4️⃣ Use in VS Code
+Open VS Code's command palette (`Cmd+Shift+P`) and look for MCP-related commands to interact with your server.
 
-### Testing with Dummy Endpoints
+### 🧪 Testing with Dummy Endpoints
 
 Here are some free JSON API endpoints you can use for testing:
 
-#### JSONPlaceholder (Fake REST API)
-- **Base URL**: `https://jsonplaceholder.typicode.com`
-- **Features**: Users, Posts, Comments, Albums, Photos, Todos
+#### 🏷️ JSONPlaceholder (Fake REST API)
+- **🌐 Base URL**: `https://jsonplaceholder.typicode.com`
+- **📋 Features**: Users, Posts, Comments, Albums, Photos, Todos
 
-#### Example Requests to Test Your MCP Server
+#### 🔬 Example Requests to Test Your MCP Server
 
-**1. GET Users:**
+<details>
+<summary><strong>1️⃣ GET Users</strong></summary>
+
 ```json
 {
   "method": "GET",
   "url": "https://jsonplaceholder.typicode.com/users"
 }
 ```
+</details>
 
-**2. GET Single User:**
+<details>
+<summary><strong>2️⃣ GET Single User</strong></summary>
+
 ```json
 {
   "method": "GET",
   "url": "https://jsonplaceholder.typicode.com/users/1"
 }
 ```
+</details>
 
-**3. CREATE Post:**
+<details>
+<summary><strong>3️⃣ CREATE Post</strong></summary>
+
 ```json
 {
   "method": "POST",
@@ -250,8 +358,11 @@ Here are some free JSON API endpoints you can use for testing:
   }
 }
 ```
+</details>
 
-**4. UPDATE Post:**
+<details>
+<summary><strong>4️⃣ UPDATE Post</strong></summary>
+
 ```json
 {
   "method": "PUT",
@@ -267,130 +378,279 @@ Here are some free JSON API endpoints you can use for testing:
   }
 }
 ```
+</details>
 
-**5. DELETE Post:**
+<details>
+<summary><strong>5️⃣ DELETE Post</strong></summary>
+
 ```json
 {
   "method": "DELETE",
   "url": "https://jsonplaceholder.typicode.com/posts/1"
 }
 ```
+</details>
 
-#### Other Test APIs
+#### 🌐 Other Test APIs
 
-**HTTPBin (HTTP testing service):**
-- GET: `https://httpbin.org/get`
-- POST: `https://httpbin.org/post`
-- PUT: `https://httpbin.org/put`
-- DELETE: `https://httpbin.org/delete`
+| API | Description | Example Endpoints |
+|-----|-------------|-------------------|
+| **HTTPBin** | HTTP testing service | `https://httpbin.org/get`, `https://httpbin.org/post` |
+| **ReqRes** | Fake user API | `https://reqres.in/api/users`, `https://reqres.in/api/users/2` |
 
-**ReqRes (Fake user API):**
-- GET Users: `https://reqres.in/api/users`
-- GET User: `https://reqres.in/api/users/2`
-- POST User: `https://reqres.in/api/users`
+### 🔄 VS Code Usage Workflow
 
-### VS Code Usage Workflow
+```mermaid
+graph TD
+    A[🚀 Start MCP Server] --> B[📖 Open VS Code]
+    B --> C[⌨️ Access MCP Commands]
+    C --> D[📨 Send CRUD Requests]
+    D --> E[👀 View JSON Responses]
+    
+    A1[npm start] --> A
+    C1[Cmd+Shift+P → MCP] --> C
+```
 
-1. **Start the MCP Server**: Run `npm start` in your terminal
-2. **Open VS Code**: Open any file or workspace
-3. **Access MCP Commands**: Use `Cmd+Shift+P` → Search for "MCP"
-4. **Send Requests**: Use the MCP interface to send CRUD requests through your server
-5. **View Responses**: See structured JSON responses in VS Code
+1. **🚀 Start the MCP Server**: Run `npm start` in your terminal
+2. **📖 Open VS Code**: Open any file or workspace
+3. **⌨️ Access MCP Commands**: Use `Cmd+Shift+P` → Search for "MCP"
+4. **📨 Send Requests**: Use the MCP interface to send CRUD requests through your server
+5. **👀 View Responses**: See structured JSON responses in VS Code
 
-### Testing Commands
+### 🧪 Testing Commands
 
 The repository includes a comprehensive `test-requests.json` file with sample requests for testing all CRUD operations. For detailed information about each test request, see [test-requests.md](test-requests.md).
 
-The test file includes examples for:
-- **JSONPlaceholder API**: Users and Posts CRUD operations
-- **HTTPBin API**: HTTP testing with custom headers
-- **ReqRes API**: User API with pagination
+> **📋 Test Coverage Includes:**
+> - **JSONPlaceholder API**: Users and Posts CRUD operations
+> - **HTTPBin API**: HTTP testing with custom headers  
+> - **ReqRes API**: User API with pagination
 
 You can use these test requests directly with your MCP client to verify the server functionality.
 
-## Security Considerations
+---
 
-- **Input Validation**: All inputs are validated using Zod schemas
-- **Command Injection Prevention**: Input sanitization prevents curl command injection attacks
-- **Timeout Protection**: Built-in timeouts (30s max, 10s connect) prevent hanging requests
-- **Network Access**: This server can make arbitrary HTTP requests - ensure proper network policies
-- **Headers**: Be careful with sensitive headers like API keys
-- **Rate Limiting**: The server includes guidance for handling API rate limits appropriately
+## 🔒 Security Considerations
 
-## Troubleshooting
+| Security Feature | Description |
+|-------------------|-------------|
+| **✅ Input Validation** | All inputs are validated using Zod schemas |
+| **🛡️ Command Injection Prevention** | Input sanitization prevents curl command injection attacks |
+| **⏰ Timeout Protection** | Built-in timeouts (30s max, 10s connect) prevent hanging requests |
+| **🌐 Network Access** | This server can make arbitrary HTTP requests - ensure proper network policies |
+| **🔑 Headers** | Be careful with sensitive headers like API keys |
+| **📊 Rate Limiting** | The server includes guidance for handling API rate limits appropriately |
 
-### Common Issues
+---
 
-1. **"Cannot find module dist/index.js"**: 
-   - Run `npm run build` to compile TypeScript to JavaScript
-   - The `dist/` directory will be created automatically during build
-   - Note: The `dist/` folder is not tracked in git as it contains compiled output
-   - Check that `tsconfig.json` has `"outDir": "./dist"` and `"rootDir": "./src"`
+## 🔧 Troubleshooting
 
-2. **TypeScript Compilation Errors**: Ensure all dependencies are installed (`npm install`)
+### ⚠️ Common Issues
 
-3. **MCP SDK Types**: Custom type declarations are provided in `src/@types/`
+<details>
+<summary><strong>🚫 "Cannot find module dist/index.js"</strong></summary>
 
-4. **Curl Not Found**: Ensure curl is installed on your system
+**Solution:**
+- Run `npm run build` to compile TypeScript to JavaScript
+- The `dist/` directory will be created automatically during build
+- Note: The `dist/` folder is not tracked in git as it contains compiled output
+- Check that `tsconfig.json` has `"outDir": "./dist"` and `"rootDir": "./src"`
+</details>
 
-5. **Network Errors**: Check target server accessibility and network policies
+<details>
+<summary><strong>🔴 TypeScript Compilation Errors</strong></summary>
 
-6. **Authentication Errors (401/403)**: 
-   - Verify API keys and tokens are correct
-   - Check if headers are properly formatted
-   - Ensure your account has the required permissions
+**Solution:**
+Ensure all dependencies are installed (`npm install`)
+</details>
 
-7. **Rate Limiting (429)**:
-   - Implement delays between requests
-   - Use exponential backoff strategies
-   - Check API documentation for rate limit policies
+<details>
+<summary><strong>📘 MCP SDK Types</strong></summary>
 
-8. **Timeout Errors**: 
-   - Server requests timeout after 30 seconds for safety
-   - Check if the target API is responding slowly
-   - Consider if the endpoint requires different timeout settings
+**Solution:**
+Custom type declarations are provided in `src/@types/`
+</details>
 
-### Development Tips
+<details>
+<summary><strong>🖥️ Curl Not Found</strong></summary>
 
-- Use `npm run dev` for watch mode during development
-- Check VS Code problems panel for TypeScript errors
-- Test with simple GET requests first
-- Validate JSON responses from target servers
+**Solution:**
+Ensure curl is installed on your system
+</details>
 
-## Contributing
+<details>
+<summary><strong>🌐 Network Errors</strong></summary>
+
+**Solution:**
+Check target server accessibility and network policies
+</details>
+
+<details>
+<summary><strong>🔒 Authentication Errors (401/403)</strong></summary>
+
+**Solutions:**
+- Verify API keys and tokens are correct
+- Check if headers are properly formatted  
+- Ensure your account has the required permissions
+</details>
+
+<details>
+<summary><strong>⏰ Rate Limiting (429)</strong></summary>
+
+**Solutions:**
+- Implement delays between requests
+- Use exponential backoff strategies
+- Check API documentation for rate limit policies
+</details>
+
+<details>
+<summary><strong>⏱️ Timeout Errors</strong></summary>
+
+**Solutions:**
+- Server requests timeout after 30 seconds for safety
+- Check if the target API is responding slowly
+- Consider if the endpoint requires different timeout settings
+</details>
+
+### 💡 Development Tips
+
+- 👀 Use `npm run dev` for watch mode during development
+- 🔍 Check VS Code problems panel for TypeScript errors
+- 🚀 Test with simple GET requests first
+- ✅ Validate JSON responses from target servers
+
+## 🤝 Contributing
 
 We welcome contributions to improve the MCP CURL server! Here's how you can contribute:
 
-1. **Fork the repository** on GitHub: [https://github.com/akhshyganesh/MCP-CURL](https://github.com/akhshyganesh/MCP-CURL)
-2. **Create a feature branch**: `git checkout -b feature/your-feature-name`
-3. **Make your changes** and ensure they follow the existing code style
-4. **Add tests** if applicable
-5. **Commit your changes**: `git commit -am 'Add some feature'`
-6. **Push to the branch**: `git push origin feature/your-feature-name`
-7. **Submit a pull request** through GitHub
+### 🚀 Quick Start
 
-### Development Guidelines
+1. **🍴 Fork the repository** on GitHub: [akhshyganesh/MCP-CURL](https://github.com/akhshyganesh/MCP-CURL)
+2. **🌿 Create a feature branch**: `git checkout -b feature/your-feature-name`
+3. **✨ Make your changes** and ensure they follow the existing code style
+4. **🧪 Add tests** if applicable
+5. **💾 Commit your changes**: `git commit -am 'Add some feature'`
+6. **📤 Push to the branch**: `git push origin feature/your-feature-name`
+7. **🔄 Submit a pull request** through GitHub
 
-- Follow TypeScript best practices
-- Use meaningful commit messages
-- Update documentation for new features
-- Ensure all builds pass before submitting PR
+### 📋 Development Guidelines
 
-## References
+- ✅ Follow TypeScript best practices
+- 📝 Use meaningful commit messages
+- 📚 Update documentation for new features
+- 🏗️ Ensure all builds pass before submitting PR
 
-- [Model Context Protocol Documentation](https://modelcontextprotocol.io/llms-full.txt)
-- [MCP SDK Reference](https://github.com/modelcontextprotocol/create-python-server)
-- [TypeScript Documentation](https://www.typescriptlang.org/docs/)
-- [Zod Schema Validation](https://zod.dev/)
+---
 
-## License
+## 📚 References
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+- 📖 [Model Context Protocol Documentation](https://modelcontextprotocol.io/llms-full.txt)
+- 🛠️ [MCP SDK Reference](https://github.com/modelcontextprotocol/create-python-server)
+- 📘 [TypeScript Documentation](https://www.typescriptlang.org/docs/)
+- ✅ [Zod Schema Validation](https://zod.dev/)
 
-Copyright (c) 2025 Akhshy Ganesh
+---
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+## 🧪 Testing
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+### Running Tests
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+```bash
+# Run all tests
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run tests with coverage
+npm run test:coverage
+```
+
+### Test Coverage
+
+The test suite includes:
+- ✅ **Server startup tests** - Ensures the server starts without crashing
+- ✅ **Executable validation** - Verifies CLI binary has correct shebang
+- ✅ **Module import tests** - Confirms the module can be imported
+- ✅ **Build verification** - Validates TypeScript compilation
+
+### Continuous Integration
+
+GitHub Actions automatically:
+- ✅ Runs tests on multiple Node.js versions (18, 20, 22)
+- ✅ Tests on multiple platforms (Ubuntu, Windows, macOS)
+- ✅ Performs security audits
+- ✅ Validates code quality with ESLint
+
+---
+
+## 🔒 Security
+
+### Security Features
+
+- ✅ **Input Sanitization** - All user inputs are validated and sanitized
+- ✅ **Command Injection Protection** - Safe curl command construction
+- ✅ **Timeout Protection** - Prevents hanging requests
+- ✅ **Error Handling** - Secure error messages without sensitive data
+- ✅ **Dependency Scanning** - Regular security audits of dependencies
+
+### Security Auditing
+
+```bash
+# Run security audit
+npm audit
+
+# Fix security issues
+npm audit fix
+
+# Check for high-severity vulnerabilities
+npm audit --audit-level=high
+```
+
+### Reporting Security Issues
+
+If you discover a security issue, please:
+
+1. **DO NOT** open a public GitHub issue
+2. Email security concerns to: [akhshy.balakannan@gmail.com](mailto:akhshy.balakannan@gmail.com)
+3. Include details about the vulnerability
+4. Allow time for the issue to be addressed before public disclosure
+
+---
+
+## 🤝 Contributing
+
+### Development Workflow
+
+1. **Fork** the repository
+2. **Clone** your fork locally
+3. **Install** dependencies: `npm install`
+4. **Build** the project: `npm run build`
+5. **Run tests**: `npm test`
+6. **Make changes** and add tests
+7. **Lint code**: `npm run lint:fix`
+8. **Create** a pull request
+
+### Code Quality Standards
+
+- ✅ All code must pass TypeScript compilation
+- ✅ All tests must pass
+- ✅ Code coverage should not decrease
+- ✅ ESLint rules must be followed
+- ✅ Security audit must pass
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+---
+
+<div align="center">
+
+### 🌟 Made with ❤️ by [Akhshy Ganesh](https://github.com/akhshyganesh)
+
+**⭐ Star this repo if you found it helpful!**
+
+</div>
