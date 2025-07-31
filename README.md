@@ -19,7 +19,9 @@ The Model Context Protocol (MCP) is an open standard that enables secure connect
 - **CRUD Operations**: Create, Read, Update, Delete via HTTP methods (POST, GET, PUT, DELETE)
 - **Curl Proxy**: Uses system curl commands to communicate with target servers
 - **AI-Friendly Responses**: Structured JSON responses with status, HTTP code, data, and error fields
+- **Intelligent Error Handling**: Provides helpful guidance for common HTTP errors (401, 403, 429, etc.)
 - **Schema Validation**: Input validation using Zod schemas
+- **Security**: Built-in timeout protection and input sanitization to prevent command injection
 - **TypeScript**: Fully typed implementation with the MCP SDK
 
 ## Architecture
@@ -149,6 +151,31 @@ All responses follow this structure:
   }
 }
 ```
+
+**Error Response Example:**
+```json
+{
+  "status": "error",
+  "code": 401,
+  "data": {
+    "message": "Unauthorized"
+  },
+  "error": "Authentication required (HTTP 401). The API endpoint requires authentication. Please provide an Authorization header (e.g., \"Authorization\": \"Bearer YOUR_TOKEN\" or \"Authorization\": \"Basic YOUR_CREDENTIALS\"). Check the API documentation for the correct authentication method."
+}
+```
+
+## Intelligent Error Handling
+
+The server provides helpful guidance for common HTTP errors:
+
+- **401 Unauthorized**: Suggests adding authentication headers with examples
+- **403 Forbidden**: Explains permission issues and troubleshooting steps
+- **429 Rate Limited**: Recommends waiting and implementing backoff strategies
+- **400 Bad Request**: Guides on fixing request format and validation issues
+- **404 Not Found**: Helps verify URLs and resource existence
+- **5xx Server Errors**: Advises on retry strategies and temporary issues
+
+Each error response includes specific, actionable guidance to help resolve the issue quickly.
 
 ## VS Code Integration
 
@@ -284,9 +311,11 @@ You can use these test requests directly with your MCP client to verify the serv
 ## Security Considerations
 
 - **Input Validation**: All inputs are validated using Zod schemas
-- **Curl Safety**: The server constructs curl commands safely, but be cautious with untrusted input
+- **Command Injection Prevention**: Input sanitization prevents curl command injection attacks
+- **Timeout Protection**: Built-in timeouts (30s max, 10s connect) prevent hanging requests
 - **Network Access**: This server can make arbitrary HTTP requests - ensure proper network policies
 - **Headers**: Be careful with sensitive headers like API keys
+- **Rate Limiting**: The server includes guidance for handling API rate limits appropriately
 
 ## Troubleshooting
 
@@ -304,6 +333,21 @@ You can use these test requests directly with your MCP client to verify the serv
 4. **Curl Not Found**: Ensure curl is installed on your system
 
 5. **Network Errors**: Check target server accessibility and network policies
+
+6. **Authentication Errors (401/403)**: 
+   - Verify API keys and tokens are correct
+   - Check if headers are properly formatted
+   - Ensure your account has the required permissions
+
+7. **Rate Limiting (429)**:
+   - Implement delays between requests
+   - Use exponential backoff strategies
+   - Check API documentation for rate limit policies
+
+8. **Timeout Errors**: 
+   - Server requests timeout after 30 seconds for safety
+   - Check if the target API is responding slowly
+   - Consider if the endpoint requires different timeout settings
 
 ### Development Tips
 
