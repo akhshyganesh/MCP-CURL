@@ -1,0 +1,24 @@
+{
+  "name": "mcp-curl",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["mcp", "model-context-protocol", "crud", "proxy", "curl"],
+  "author": "akhshyganesh <akhshy.balakannan@gmail.com>",
+  "license": "MIT",
+  "description": "An MCP server that exposes CRUD endpoints that proxy requests to another server using curl commands",
+  "devDependencies": {
+    "@types/node": "^24.1.0",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.0",
+    "zod": "^3.25.76"
+  }
+}
