@@ -1,6 +1,6 @@
 # 🌐 MCP HTTP Proxy
 
-> A powerful **Model Context Protocol (MCP)** server that provides HTTP request proxying with CRUD operations for AI applications. All responses are structured for AI consumption with consistent status, data, and error fields.
+> A powerful **Model Context Protocol (MCP)** server that provides HTTP request proxying for AI applications. All responses are structured for AI consumption with consistent status, data, and error fields.
 
 ---
 
@@ -22,7 +22,7 @@ The **Model Context Protocol (MCP)** is an open standard that enables secure con
 
 ## ✨ Features
 
-- 🔄 **CRUD Operations**: Create, Read, Update, Delete via HTTP methods (POST, GET, PUT, DELETE)
+- 🌐 **HTTP Request Proxying**: Support for GET, POST, PUT, DELETE methods to external APIs
 - 🖥️ **Curl Proxy**: Uses system curl commands to communicate with target servers
 - 🤖 **AI-Friendly Responses**: Structured JSON responses with status, HTTP code, data, and error fields
 - 🛡️ **Intelligent Error Handling**: Provides helpful guidance for common HTTP errors (401, 403, 429, etc.)
@@ -404,7 +404,7 @@ Here are some free JSON API endpoints you can use for testing:
 graph TD
     A[🚀 Start MCP Server] --> B[📖 Open VS Code]
     B --> C[⌨️ Access MCP Commands]
-    C --> D[📨 Send CRUD Requests]
+    C --> D[📨 Send HTTP Requests]
     D --> E[👀 View JSON Responses]
     
     A1[npm start] --> A
@@ -414,15 +414,15 @@ graph TD
 1. **🚀 Start the MCP Server**: Run `npm start` in your terminal
 2. **📖 Open VS Code**: Open any file or workspace
 3. **⌨️ Access MCP Commands**: Use `Cmd+Shift+P` → Search for "MCP"
-4. **📨 Send Requests**: Use the MCP interface to send CRUD requests through your server
+4. **📨 Send Requests**: Use the MCP interface to send HTTP requests through your server
 5. **👀 View Responses**: See structured JSON responses in VS Code
 
 ### 🧪 Testing Commands
 
-The repository includes a comprehensive `test-requests.json` file with sample requests for testing all CRUD operations. For detailed information about each test request, see [test-requests.md](test-requests.md).
+The repository includes a comprehensive `test-requests.json` file with sample requests for testing all HTTP operations. For detailed information about each test request, see [test-requests.md](test-requests.md).
 
 > **📋 Test Coverage Includes:**
-> - **JSONPlaceholder API**: Users and Posts CRUD operations
+> - **JSONPlaceholder API**: Users and Posts HTTP operations
 > - **HTTPBin API**: HTTP testing with custom headers  
 > - **ReqRes API**: User API with pagination
 
@@ -521,7 +521,7 @@ Check target server accessibility and network policies
 
 ## 🤝 Contributing
 
-We welcome contributions to improve the MCP CURL server! Here's how you can contribute:
+We welcome contributions to improve the MCP HTTP Proxy server! Here's how you can contribute:
 
 ### 🚀 Quick Start
 

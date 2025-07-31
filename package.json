@@ -1,7 +1,7 @@
 {
   "name": "mcp-http-proxy",
-  "version": "1.0.0",
-  "description": "A Model Context Protocol (MCP) server that provides HTTP request proxying with CRUD operations for AI applications",
+  "version": "1.1.0",
+  "description": "A Model Context Protocol (MCP) server that provides HTTP request proxying for AI applications with structured responses",
   "main": "dist/index.js",
   "bin": {
     "mcp-http-proxy": "dist/index.js"
@@ -24,7 +24,7 @@
   "keywords": [
     "mcp",
     "model-context-protocol",
-    "crud",
+    "http-proxy",
     "proxy",
     "curl",
     "http",

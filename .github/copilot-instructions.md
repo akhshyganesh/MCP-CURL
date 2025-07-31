@@ -1,5 +1,5 @@
 <!--
-MCP CURL Server - GitHub Copilot Instructions
+MCP HTTP Proxy Server - GitHub Copilot Instructions
 Repository: https://github.com/akhshyganesh/mcp-http-proxy
 Author: Akhshy Ganesh <akhshy.balakannan@gmail.com>
 License: MIT
@@ -8,12 +8,12 @@ Use this file to provide workspace-specific custom instructions to Copilot.
 For more details, visit https://code.visualstudio.com/docs/copilot/copilot-customization#_use-a-githubcopilotinstructionsmd-file
 -->
 
-## MCP CURL Server Project
+## MCP HTTP Proxy Server Project
 
-This is a Model Context Protocol (MCP) server project that provides CRUD endpoints for proxying HTTP requests using curl commands.
+This is a Model Context Protocol (MCP) server project that provides HTTP request proxying using curl commands with structured AI-friendly responses.
 
 ### Project Overview
-- **Name**: MCP CURL
+- **Name**: MCP HTTP Proxy
 - **Type**: MCP Server
 - **Language**: TypeScript
 - **Framework**: Model Context Protocol SDK
@@ -27,7 +27,7 @@ This is a Model Context Protocol (MCP) server project that provides CRUD endpoin
 ### Development Guidelines
 
 1. **Server Architecture**:
-   - The server should expose CRUD endpoints that perform curl commands to external servers
+   - The server should expose HTTP request endpoints that perform curl commands to external servers
    - All responses must be structured for AI consumption with consistent fields: `status`, `code`, `data`, `error`
    - Use TypeScript with the `@modelcontextprotocol/sdk` package
    - Implement proper error handling and input validation
@@ -57,7 +57,7 @@ This is a Model Context Protocol (MCP) server project that provides CRUD endpoin
 5. **Testing**:
    - Use the provided `test-requests.json` file for testing
    - Test with public APIs like JSONPlaceholder, HTTPBin, and ReqRes
-   - Verify all CRUD operations (GET, POST, PUT, DELETE)
+   - Verify all HTTP operations (GET, POST, PUT, DELETE)
    - Ensure proper error handling for various scenarios
 
 ### File Structure

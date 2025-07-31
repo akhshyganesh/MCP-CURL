@@ -47,7 +47,7 @@ describe('MCP HTTP Proxy Server', () => {
       serverProcess.stderr?.on('data', (data) => {
         errorOutput += data.toString();
         // Look for the server startup message
-        if (errorOutput.includes('MCP CURL Server running on stdio')) {
+        if (errorOutput.includes('MCP HTTP Proxy Server running on stdio')) {
           global.clearTimeout(timeout);
           resolve();
         }

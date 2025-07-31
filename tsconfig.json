@@ -1,5 +1,5 @@
 {
-  // TypeScript Configuration for MCP CURL Server
+  // TypeScript Configuration for MCP HTTP Proxy Server
   // Repository: https://github.com/akhshyganesh/mcp-http-proxy
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */

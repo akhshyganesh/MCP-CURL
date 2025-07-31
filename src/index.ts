@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 /**
- * MCP CURL Server
+ * MCP HTTP Proxy Server
  * 
- * A Model Context Protocol (MCP) server that exposes CRUD endpoints
- * to proxy HTTP requests to external servers using curl commands.
+ * A Model Context Protocol (MCP) server that provides HTTP request proxying
+ * to external servers using curl commands with structured AI-friendly responses.
  * 
  * Repository: https://github.com/akhshyganesh/mcp-http-proxy
  * Author: Akhshy Ganesh <akhshy.balakannan@gmail.com>
@@ -18,7 +18,7 @@ import { z } from 'zod';
 import { exec } from 'child_process';
 
 // Define schemas for input validation using Zod
-const CrudInputSchema = z.object({
+const HttpRequestInputSchema = z.object({
   method: z.enum(['GET', 'POST', 'PUT', 'DELETE']),
   url: z.string().url(),
   data: z.optional(z.record(z.any())),
@@ -26,7 +26,7 @@ const CrudInputSchema = z.object({
 });
 
 // Define the structure of API responses for consistency
-const CrudOutputSchema = z.object({
+const HttpResponseOutputSchema = z.object({
   status: z.string(),
   code: z.number(),
   data: z.any(),
@@ -35,10 +35,10 @@ const CrudOutputSchema = z.object({
 
 /**
  * Builds a curl command string from the input parameters
- * @param input - The validated CRUD input containing method, URL, headers, and data
+ * @param input - The validated HTTP request input containing method, URL, headers, and data
  * @returns A curl command string ready for execution
  */
-function buildCurlCommand(input: z.infer<typeof CrudInputSchema>): string {
+function buildCurlCommand(input: z.infer<typeof HttpRequestInputSchema>): string {
   let cmd = `curl -s -w "\n%{http_code}" --max-time 30 --connect-timeout 10 -X ${input.method} `;
   
   // Add headers if provided
@@ -69,7 +69,7 @@ function buildCurlCommand(input: z.infer<typeof CrudInputSchema>): string {
  * @param url - The URL that was requested
  * @returns A helpful error message with suggestions
  */
-function getErrorGuidance(statusCode: number, url: string): string {
+function getErrorGuidance(statusCode: number, _url: string): string {
   switch (statusCode) {
     case 401:
       return `Authentication required (HTTP 401). The API endpoint requires authentication. Please provide an Authorization header (e.g., "Authorization": "Bearer YOUR_TOKEN" or "Authorization": "Basic YOUR_CREDENTIALS"). Check the API documentation for the correct authentication method.`;
@@ -112,10 +112,10 @@ function getErrorGuidance(statusCode: number, url: string): string {
 
 /**
  * Executes a curl command and returns a structured response
- * @param input - The validated CRUD input parameters
+ * @param input - The validated HTTP request input parameters
  * @returns Promise containing structured response with status, HTTP code, data, and optional error
  */
-async function executeCurlCommand(input: z.infer<typeof CrudInputSchema>): Promise<z.infer<typeof CrudOutputSchema>> {
+async function executeCurlCommand(input: z.infer<typeof HttpRequestInputSchema>): Promise<z.infer<typeof HttpResponseOutputSchema>> {
   const cmd = buildCurlCommand(input);
   
   return new Promise((resolve) => {
@@ -143,7 +143,7 @@ async function executeCurlCommand(input: z.infer<typeof CrudInputSchema>): Promi
         return;
       }
       
-      const [_, body, codeStr] = match;
+      const [, body, codeStr] = match;
       const statusCode = Number(codeStr);
       let data: any = body;
       
@@ -175,7 +175,7 @@ async function executeCurlCommand(input: z.infer<typeof CrudInputSchema>): Promi
 // Create and configure the MCP server
 const server = new Server(
   {
-    name: 'curl',
+    name: 'http-proxy',
     version: '1.0.0',
   },
   {
@@ -185,14 +185,14 @@ const server = new Server(
   }
 );
 
-// Add the CRUD tool handler
+// Add the HTTP request tool handler
 server.setRequestHandler(CallToolRequestSchema, async (request: any) => {
-  if (request.params.name !== 'crud') {
+  if (request.params.name !== 'http_request') {
     throw new Error(`Unknown tool: ${request.params.name}`);
   }
 
   // Validate input arguments using Zod schema
-  const parsed = CrudInputSchema.safeParse(request.params.arguments);
+  const parsed = HttpRequestInputSchema.safeParse(request.params.arguments);
   if (!parsed.success) {
     throw new Error(`Invalid arguments: ${parsed.error.message}`);
   }
@@ -214,8 +214,8 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
   return {
     tools: [
       {
-        name: 'crud',
-        description: 'Execute CRUD operations via HTTP requests using curl',
+        name: 'http_request',
+        description: 'Execute HTTP requests to external APIs using curl with structured responses',
         inputSchema: {
           type: 'object',
           properties: {
@@ -254,7 +254,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error('MCP CURL Server running on stdio - ready to handle requests');
+  console.error('MCP HTTP Proxy Server running on stdio - ready to handle requests');
 }
 
 // Start the server and handle any errors

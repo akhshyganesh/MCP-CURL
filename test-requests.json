@@ -23,7 +23,7 @@
       },
       "data": {
         "title": "Test Post via MCP",
-        "body": "This is a test post created through the MCP CRUD server",
+        "body": "This is a test post created through the MCP HTTP Proxy server",
         "userId": 1
       }
     }
@@ -39,7 +39,7 @@
       "data": {
         "id": 1,
         "title": "Updated Post Title",
-        "body": "This post has been updated via MCP server",
+        "body": "This post has been updated via MCP HTTP Proxy server",
         "userId": 1
       }
     }
@@ -57,7 +57,7 @@
       "method": "GET",
       "url": "https://httpbin.org/get",
       "headers": {
-        "User-Agent": "MCP-CRUD-Server/1.0"
+        "User-Agent": "MCP-HTTP-Proxy-Server/1.0"
       }
     }
   },
@@ -70,7 +70,7 @@
         "Content-Type": "application/json"
       },
       "data": {
-        "message": "Hello from MCP CRUD Server",
+        "message": "Hello from MCP HTTP Proxy Server",
         "timestamp": "2025-07-31T12:00:00Z"
       }
     }
