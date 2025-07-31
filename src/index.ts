@@ -6,7 +6,7 @@
  * A Model Context Protocol (MCP) server that exposes CRUD endpoints
  * to proxy HTTP requests to external servers using curl commands.
  * 
- * Repository: https://github.com/akhshyganesh/MCP-CURL
+ * Repository: https://github.com/akhshyganesh/mcp-http-proxy
  * Author: Akhshy Ganesh <akhshy.balakannan@gmail.com>
  * License: MIT
  */

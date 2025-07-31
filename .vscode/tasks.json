@@ -1,6 +1,6 @@
 {
 	// VS Code Tasks Configuration for MCP HTTP Proxy Server
-	// Repository: https://github.com/akhshyganesh/MCP-CURL
+	// Repository: https://github.com/akhshyganesh/mcp-http-proxy
 	"version": "2.0.0",
 	"tasks": [
 		{

@@ -38,21 +38,23 @@ describe('MCP HTTP Proxy Server', () => {
       });
 
       let output = '';
+      let errorOutput = '';
+      
       serverProcess.stdout?.on('data', (data) => {
         output += data.toString();
-        // Look for signs that the server started successfully
-        if (output.includes('MCP') || output.includes('server') || output.includes('listening')) {
-          global.clearTimeout(timeout);
-          resolve();
-        }
       });
 
       serverProcess.stderr?.on('data', (data) => {
-        const error = data.toString();
-        // Ignore expected warnings/info, fail on actual errors
-        if (error.includes('Error:') || error.includes('TypeError:') || error.includes('ReferenceError:')) {
+        errorOutput += data.toString();
+        // Look for the server startup message
+        if (errorOutput.includes('MCP CURL Server running on stdio')) {
           global.clearTimeout(timeout);
-          reject(new Error(`Server error: ${error}`));
+          resolve();
+        }
+        // Fail on actual errors but ignore expected startup messages
+        if (errorOutput.includes('Error:') && !errorOutput.includes('running on stdio')) {
+          global.clearTimeout(timeout);
+          reject(new Error(`Server error: ${errorOutput}`));
         }
       });
 

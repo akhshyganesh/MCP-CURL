@@ -1,6 +1,6 @@
 <!--
 MCP CURL Server - GitHub Copilot Instructions
-Repository: https://github.com/akhshyganesh/MCP-CURL
+Repository: https://github.com/akhshyganesh/mcp-http-proxy
 Author: Akhshy Ganesh <akhshy.balakannan@gmail.com>
 License: MIT
 
@@ -22,7 +22,7 @@ This is a Model Context Protocol (MCP) server project that provides CRUD endpoin
 ### Key Resources
 - **MCP Documentation**: https://modelcontextprotocol.io/llms-full.txt
 - **SDK Reference**: https://github.com/modelcontextprotocol/create-python-server
-- **Repository**: https://github.com/akhshyganesh/MCP-CURL
+- **Repository**: https://github.com/akhshyganesh/mcp-http-proxy
 
 ### Development Guidelines
 

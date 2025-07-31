@@ -1,7 +1,7 @@
 {
   // MCP Server Configuration for VS Code
   // This configures the MCP HTTP Proxy server to run with stdio transport
-  // Repository: https://github.com/akhshyganesh/MCP-CURL
+  // Repository: https://github.com/akhshyganesh/mcp-http-proxy
   "servers": {
     "mcp-http-proxy": {
       "type": "stdio",

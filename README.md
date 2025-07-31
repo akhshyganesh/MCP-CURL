@@ -8,7 +8,7 @@
 
 | Field | Value |
 |-------|-------|
-| **🔗 GitHub** | [akhshyganesh/MCP-CURL](https://github.com/akhshyganesh/MCP-CURL) |
+| **🔗 GitHub** | [akhshyganesh/mcp-http-proxy](https://github.com/akhshyganesh/mcp-http-proxy) |
 | **👤 Author** | Akhshy Ganesh ([akhshy.balakannan@gmail.com](mailto:akhshy.balakannan@gmail.com)) |
 | **📄 License** | MIT License |
 | **🔖 Version** | 1.0.0 |
@@ -60,7 +60,7 @@ mcp-http-proxy
 #### Option 2: Install from GitHub
 ```bash
 # Install directly from the repository
-npm install -g git+https://github.com/akhshyganesh/MCP-CURL.git
+npm install -g git+https://github.com/akhshyganesh/mcp-http-proxy.git
 
 # Start the server
 mcp-http-proxy
@@ -76,8 +76,8 @@ npx mcp-http-proxy
 
 #### 1️⃣ Clone and Install Dependencies
 ```bash
-git clone https://github.com/akhshyganesh/MCP-CURL.git
-cd MCP-CURL
+git clone https://github.com/akhshyganesh/mcp-http-proxy.git
+cd mcp-http-proxy
 npm install
 ```
 
@@ -525,7 +525,7 @@ We welcome contributions to improve the MCP CURL server! Here's how you can cont
 
 ### 🚀 Quick Start
 
-1. **🍴 Fork the repository** on GitHub: [akhshyganesh/MCP-CURL](https://github.com/akhshyganesh/MCP-CURL)
+1. **🍴 Fork the repository** on GitHub: [akhshyganesh/mcp-http-proxy](https://github.com/akhshyganesh/mcp-http-proxy)
 2. **🌿 Create a feature branch**: `git checkout -b feature/your-feature-name`
 3. **✨ Make your changes** and ensure they follow the existing code style
 4. **🧪 Add tests** if applicable

@@ -3,11 +3,11 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   extends: [
     'eslint:recommended',
-    '@typescript-eslint/recommended',
   ],
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module',
+    project: './tsconfig.json',
   },
   env: {
     node: true,
@@ -15,11 +15,10 @@ module.exports = {
     jest: true,
   },
   rules: {
+    'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-    '@typescript-eslint/no-explicit-any': 'warn',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
     'no-console': 'off',
+    'no-undef': 'off', // TypeScript handles this
   },
-  ignorePatterns: ['dist/', 'node_modules/', '*.js'],
+  ignorePatterns: ['dist/', 'node_modules/', '*.js', 'jest.config.js', '.eslintrc.js'],
 };

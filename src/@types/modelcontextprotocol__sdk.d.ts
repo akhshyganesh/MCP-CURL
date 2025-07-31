@@ -4,7 +4,7 @@
  * This file provides TypeScript type definitions for the MCP SDK modules
  * that may not have complete type definitions available.
  * 
- * Repository: https://github.com/akhshyganesh/MCP-CURL
+ * Repository: https://github.com/akhshyganesh/mcp-http-proxy
  * License: MIT
  */
 
