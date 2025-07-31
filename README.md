@@ -1,6 +1,14 @@
-# MCP Curl
+# MCP CURL
 
-This Model Context Protocol (MCP) server exposes CRUD endpoints that proxy HTTP requests to another server using curl commands. All responses are structured for AI consumption with consistent status, data, and error fields.
+A Model Context Protocol (MCP) server that exposes CRUD endpoints to proxy HTTP requests to external servers using curl commands. All responses are structured for AI consumption with consistent status, data, and error fields.
+
+## Repository Information
+
+- **GitHub**: [https://github.com/akhshyganesh/MCP-CURL](https://github.com/akhshyganesh/MCP-CURL)
+- **Author**: Akhshy Ganesh ([akhshy.balakannan@gmail.com](mailto:akhshy.balakannan@gmail.com))
+- **License**: MIT License
+- **Version**: 1.0.0
+- **Package**: `mcp-curl`
 
 ## What is MCP?
 
@@ -26,8 +34,8 @@ The server receives MCP requests, validates input, constructs curl commands, exe
 
 1. **Clone and install dependencies:**
    ```sh
-   git clone <repository-url>
-   cd mcp-curl-crud-server
+   git clone https://github.com/akhshyganesh/MCP-CURL.git
+   cd MCP-CURL
    npm install
    ```
 
@@ -54,13 +62,23 @@ The server receives MCP requests, validates input, constructs curl commands, exe
 
 ```
 ├── src/
-│   ├── index.ts              # Main server implementation
+│   ├── index.ts              # Main MCP server implementation
 │   └── @types/               # Custom type declarations
 │       └── modelcontextprotocol__sdk.d.ts
 ├── dist/                     # Compiled JavaScript (generated)
 ├── .vscode/
-│   └── mcp.json             # VS Code MCP integration config
-└── package.json
+│   ├── mcp.json             # VS Code MCP integration config
+│   └── tasks.json           # VS Code build tasks
+├── .github/
+│   └── copilot-instructions.md # GitHub Copilot workspace instructions
+├── test-requests.json        # Sample test requests
+├── test-requests.md          # Test requests documentation
+├── package.json              # Project dependencies and scripts
+├── tsconfig.json            # TypeScript configuration
+├── tsconfig.build.json      # TypeScript build configuration
+├── .gitignore               # Git ignore patterns
+├── LICENSE                  # MIT license file
+└── README.md               # This file
 ```
 
 ## Usage
@@ -254,34 +272,14 @@ Here are some free JSON API endpoints you can use for testing:
 
 ### Testing Commands
 
-Create a test file `test-requests.json` with sample requests:
+The repository includes a comprehensive `test-requests.json` file with sample requests for testing all CRUD operations. For detailed information about each test request, see [test-requests.md](test-requests.md).
 
-```json
-[
-  {
-    "name": "Get All Users",
-    "request": {
-      "method": "GET",
-      "url": "https://jsonplaceholder.typicode.com/users"
-    }
-  },
-  {
-    "name": "Create New Post",
-    "request": {
-      "method": "POST",
-      "url": "https://jsonplaceholder.typicode.com/posts",
-      "headers": {
-        "Content-Type": "application/json"
-      },
-      "data": {
-        "title": "Test Post",
-        "body": "This is a test post created via MCP",
-        "userId": 1
-      }
-    }
-  }
-]
-```
+The test file includes examples for:
+- **JSONPlaceholder API**: Users and Posts CRUD operations
+- **HTTPBin API**: HTTP testing with custom headers
+- **ReqRes API**: User API with pagination
+
+You can use these test requests directly with your MCP client to verify the server functionality.
 
 ## Security Considerations
 
@@ -316,11 +314,22 @@ Create a test file `test-requests.json` with sample requests:
 
 ## Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+We welcome contributions to improve the MCP CURL server! Here's how you can contribute:
+
+1. **Fork the repository** on GitHub: [https://github.com/akhshyganesh/MCP-CURL](https://github.com/akhshyganesh/MCP-CURL)
+2. **Create a feature branch**: `git checkout -b feature/your-feature-name`
+3. **Make your changes** and ensure they follow the existing code style
+4. **Add tests** if applicable
+5. **Commit your changes**: `git commit -am 'Add some feature'`
+6. **Push to the branch**: `git push origin feature/your-feature-name`
+7. **Submit a pull request** through GitHub
+
+### Development Guidelines
+
+- Follow TypeScript best practices
+- Use meaningful commit messages
+- Update documentation for new features
+- Ensure all builds pass before submitting PR
 
 ## References
 
@@ -331,4 +340,12 @@ Create a test file `test-requests.json` with sample requests:
 
 ## License
 
-ISC License - see package.json for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+Copyright (c) 2025 Akhshy Ganesh
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

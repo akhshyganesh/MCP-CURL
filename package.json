@@ -1,7 +1,29 @@
 {
   "name": "mcp-curl",
   "version": "1.0.0",
+  "description": "A Model Context Protocol (MCP) server that exposes CRUD endpoints to proxy HTTP requests to external servers using curl commands",
   "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akhshyganesh/MCP-CURL.git"
+  },
+  "homepage": "https://github.com/akhshyganesh/MCP-CURL",
+  "bugs": {
+    "url": "https://github.com/akhshyganesh/MCP-CURL/issues"
+  },
+  "keywords": [
+    "mcp", 
+    "model-context-protocol", 
+    "crud", 
+    "proxy", 
+    "curl", 
+    "http", 
+    "api", 
+    "typescript",
+    "ai"
+  ],
+  "author": "Akhshy Ganesh <akhshy.balakannan@gmail.com>",
+  "license": "MIT",
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
@@ -9,10 +31,6 @@
     "clean": "rm -rf dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["mcp", "model-context-protocol", "crud", "proxy", "curl"],
-  "author": "akhshyganesh <akhshy.balakannan@gmail.com>",
-  "license": "MIT",
-  "description": "An MCP server that exposes CRUD endpoints that proxy requests to another server using curl commands",
   "devDependencies": {
     "@types/node": "^24.1.0",
     "typescript": "^5.8.3"

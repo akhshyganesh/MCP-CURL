@@ -1,3 +1,13 @@
+/**
+ * Custom type declarations for Model Context Protocol SDK
+ * 
+ * This file provides TypeScript type definitions for the MCP SDK modules
+ * that may not have complete type definitions available.
+ * 
+ * Repository: https://github.com/akhshyganesh/MCP-CURL
+ * License: MIT
+ */
+
 declare module '@modelcontextprotocol/sdk/server/index.js' {
   export class Server {
     constructor(serverInfo: any, capabilities: any);

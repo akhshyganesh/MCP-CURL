@@ -1,10 +1,21 @@
+/**
+ * MCP CURL Server
+ * 
+ * A Model Context Protocol (MCP) server that exposes CRUD endpoints
+ * to proxy HTTP requests to external servers using curl commands.
+ * 
+ * Repository: https://github.com/akhshyganesh/MCP-CURL
+ * Author: Akhshy Ganesh <akhshy.balakannan@gmail.com>
+ * License: MIT
+ */
+
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
 import { exec } from 'child_process';
 
-// Define schemas for input validation
+// Define schemas for input validation using Zod
 const CrudInputSchema = z.object({
   method: z.enum(['GET', 'POST', 'PUT', 'DELETE']),
   url: z.string().url(),
@@ -12,6 +23,7 @@ const CrudInputSchema = z.object({
   headers: z.optional(z.record(z.string())),
 });
 
+// Define the structure of API responses for consistency
 const CrudOutputSchema = z.object({
   status: z.string(),
   code: z.number(),
@@ -19,22 +31,35 @@ const CrudOutputSchema = z.object({
   error: z.optional(z.string()),
 });
 
-// Helper to build curl command
+/**
+ * Builds a curl command string from the input parameters
+ * @param input - The validated CRUD input containing method, URL, headers, and data
+ * @returns A curl command string ready for execution
+ */
 function buildCurlCommand(input: z.infer<typeof CrudInputSchema>): string {
   let cmd = `curl -s -w "\n%{http_code}" -X ${input.method} `;
+  
+  // Add headers if provided
   if (input.headers) {
     for (const [key, value] of Object.entries(input.headers)) {
       cmd += `-H '${key}: ${value}' `;
     }
   }
+  
+  // Add request body for POST and PUT requests
   if (input.data && (input.method === 'POST' || input.method === 'PUT')) {
     cmd += `-d '${JSON.stringify(input.data)}' `;
   }
+  
   cmd += `'${input.url}'`;
   return cmd;
 }
 
-// Execute curl command and return structured response
+/**
+ * Executes a curl command and returns a structured response
+ * @param input - The validated CRUD input parameters
+ * @returns Promise containing structured response with status, HTTP code, data, and optional error
+ */
 async function executeCurlCommand(input: z.infer<typeof CrudInputSchema>): Promise<z.infer<typeof CrudOutputSchema>> {
   const cmd = buildCurlCommand(input);
   
@@ -45,7 +70,8 @@ async function executeCurlCommand(input: z.infer<typeof CrudInputSchema>): Promi
         return;
       }
       
-      // Split response and HTTP code
+      // Split response body and HTTP status code
+      // Curl outputs the response body followed by HTTP code on the last line
       const match = stdout.match(/([\s\S]*)\n(\d{3})$/);
       if (!match) {
         resolve({ status: 'error', code: 500, data: null, error: 'Malformed response' });
@@ -54,6 +80,8 @@ async function executeCurlCommand(input: z.infer<typeof CrudInputSchema>): Promi
       
       const [_, body, codeStr] = match;
       let data: any = body;
+      
+      // Attempt to parse response as JSON, fall back to string if invalid
       try { 
         data = JSON.parse(body); 
       } catch {
@@ -65,7 +93,7 @@ async function executeCurlCommand(input: z.infer<typeof CrudInputSchema>): Promi
   });
 }
 
-// Create and configure the server
+// Create and configure the MCP server
 const server = new Server(
   {
     name: 'curl-crud-mcp-server',
@@ -78,17 +106,19 @@ const server = new Server(
   }
 );
 
-// Add the CRUD tool
+// Add the CRUD tool handler
 server.setRequestHandler(CallToolRequestSchema, async (request: any) => {
   if (request.params.name !== 'crud') {
     throw new Error(`Unknown tool: ${request.params.name}`);
   }
 
+  // Validate input arguments using Zod schema
   const parsed = CrudInputSchema.safeParse(request.params.arguments);
   if (!parsed.success) {
     throw new Error(`Invalid arguments: ${parsed.error.message}`);
   }
 
+  // Execute the curl command and return structured response
   const result = await executeCurlCommand(parsed.data);
   return {
     content: [
@@ -100,7 +130,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request: any) => {
   };
 });
 
-// List available tools
+// List available tools for MCP clients
 server.setRequestHandler(ListToolsRequestSchema, async () => {
   return {
     tools: [
@@ -138,13 +168,17 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
   };
 });
 
-// Start the server
+/**
+ * Start the MCP server
+ * Initializes the server with stdio transport for communication with MCP clients
+ */
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error('MCP CRUD Server running on stdio');
+  console.error('MCP CURL Server running on stdio - ready to handle requests');
 }
 
+// Start the server and handle any errors
 main().catch((error) => {
   console.error('Server error:', error);
   process.exit(1);

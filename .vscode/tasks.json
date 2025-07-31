@@ -1,4 +1,6 @@
 {
+	// VS Code Tasks Configuration for MCP CURL Server
+	// Repository: https://github.com/akhshyganesh/MCP-CURL
 	"version": "2.0.0",
 	"tasks": [
 		{

@@ -1,3 +1,10 @@
+#
+# MCP CURL Server - Git Ignore Rules
+# Repository: https://github.com/akhshyganesh/MCP-CURL
+# Author: Akhshy Ganesh <akhshy.balakannan@gmail.com>
+# License: MIT
+#
+
 # Dependencies
 node_modules/
 npm-debug.log*
@@ -131,3 +138,5 @@ test-reports/
 
 # MCP specific
 *.mcp.log
+
+# End of .gitignore
