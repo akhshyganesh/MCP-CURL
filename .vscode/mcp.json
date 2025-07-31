@@ -3,7 +3,7 @@
   // This configures the MCP CURL server to run with stdio transport
   // Repository: https://github.com/akhshyganesh/MCP-CURL
   "servers": {
-    "curl-crud-mcp-server": {
+    "mcp-http-proxy": {
       "type": "stdio",
       "command": "node",
       "args": ["dist/index.js"]
