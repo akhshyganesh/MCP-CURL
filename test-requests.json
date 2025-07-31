@@ -1,0 +1,85 @@
+[
+  {
+    "name": "Get All Users",
+    "request": {
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/users"
+    }
+  },
+  {
+    "name": "Get Single User",
+    "request": {
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/users/1"
+    }
+  },
+  {
+    "name": "Create New Post",
+    "request": {
+      "method": "POST",
+      "url": "https://jsonplaceholder.typicode.com/posts",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "data": {
+        "title": "Test Post via MCP",
+        "body": "This is a test post created through the MCP CRUD server",
+        "userId": 1
+      }
+    }
+  },
+  {
+    "name": "Update Post",
+    "request": {
+      "method": "PUT",
+      "url": "https://jsonplaceholder.typicode.com/posts/1",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "data": {
+        "id": 1,
+        "title": "Updated Post Title",
+        "body": "This post has been updated via MCP server",
+        "userId": 1
+      }
+    }
+  },
+  {
+    "name": "Delete Post",
+    "request": {
+      "method": "DELETE",
+      "url": "https://jsonplaceholder.typicode.com/posts/1"
+    }
+  },
+  {
+    "name": "Test HTTPBin GET",
+    "request": {
+      "method": "GET",
+      "url": "https://httpbin.org/get",
+      "headers": {
+        "User-Agent": "MCP-CRUD-Server/1.0"
+      }
+    }
+  },
+  {
+    "name": "Test HTTPBin POST",
+    "request": {
+      "method": "POST",
+      "url": "https://httpbin.org/post",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "data": {
+        "message": "Hello from MCP CRUD Server",
+        "timestamp": "2025-07-31T12:00:00Z"
+      }
+    }
+  },
+  {
+    "name": "Get ReqRes Users",
+    "request": {
+      "method": "GET",
+      "url": "https://reqres.in/api/users?page=1"
+    }
+  }
+]
