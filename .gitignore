@@ -84,7 +84,6 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-dist
 
 # Gatsby files
 .cache/
@@ -128,9 +127,9 @@ Thumbs.db
 *.ipr
 *.iws
 
-# Build outputs (keep dist/ since it's part of the MCP server)
-# Uncomment the line below if you don't want to track compiled output
-# dist/
+# Build outputs
+dist/
+*.tsbuildinfo
 
 # Test outputs
 test-results/
