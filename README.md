@@ -67,7 +67,7 @@ The server receives MCP requests, validates input, constructs curl commands, exe
 │   ├── index.ts              # Main MCP server implementation
 │   └── @types/               # Custom type declarations
 │       └── modelcontextprotocol__sdk.d.ts
-├── dist/                     # Compiled JavaScript (generated)
+├── dist/                     # Compiled JavaScript (generated, not tracked)
 ├── .vscode/
 │   ├── mcp.json             # VS Code MCP integration config
 │   └── tasks.json           # VS Code build tasks
@@ -323,7 +323,8 @@ You can use these test requests directly with your MCP client to verify the serv
 
 1. **"Cannot find module dist/index.js"**: 
    - Run `npm run build` to compile TypeScript to JavaScript
-   - Ensure the `dist/` directory exists with `index.js` inside
+   - The `dist/` directory will be created automatically during build
+   - Note: The `dist/` folder is not tracked in git as it contains compiled output
    - Check that `tsconfig.json` has `"outDir": "./dist"` and `"rootDir": "./src"`
 
 2. **TypeScript Compilation Errors**: Ensure all dependencies are installed (`npm install`)
